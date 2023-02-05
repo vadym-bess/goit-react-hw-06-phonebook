@@ -1,11 +1,28 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteContacts } from 'redux/contact.slice';
 
-export const ContactList = ({ contacts, onClick }) => {
+export const ContactList = () => {
+  const dispatch = useDispatch();
+
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.filter.filter);
+
+  const handleDeleteContact = id => {
+    dispatch(deleteContacts(id));
+  };
+
+  const normalizeFilter = filter.toLocaleLowerCase();
+
+  const filterContacts = contacts.filter(contact => {
+    return contact.name.toLocaleLowerCase().includes(normalizeFilter);
+  });
+
   return (
     <div>
-      {contacts.map(contact => {
+      {filterContacts.map(contact => {
         return (
           <div className="ContactListThumb" key={nanoid()}>
             <p>
@@ -15,7 +32,7 @@ export const ContactList = ({ contacts, onClick }) => {
               className="button"
               type="button"
               onClick={() => {
-                onClick(contact.id);
+                handleDeleteContact(contact.id);
               }}
             >
               Delete
