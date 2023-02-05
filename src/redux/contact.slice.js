@@ -32,7 +32,6 @@ export const contactsSlice = createSlice({
       },
     },
     deleteContacts(state, action) {
-      console.log(action);
       const index = state.contacts.findIndex(
         contact => contact.id === action.payload
       );
@@ -42,8 +41,3 @@ export const contactsSlice = createSlice({
 });
 
 export const { addContacts, deleteContacts } = contactsSlice.actions;
-
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-// }

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import css from './ContactForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -77,8 +76,4 @@ export const ContactForm = ({ onSubmit }) => {
       </button>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
